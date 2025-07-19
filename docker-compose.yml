@@ -1,0 +1,50 @@
+services:
+  # Main service: Ollama + FastAPI
+  llm-container:
+    build: .
+    ports:
+      - "8080:8000"    # FastAPI (changed from 8000 to avoid conflicts)
+      - "11434:11434"  # Ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_PORT=11434
+      - DEFAULT_MODEL=llama3.2:1b
+    volumes:
+      - /mnt/assets/models/llm:/root/.ollama/models
+      - ./scripts:/app/scripts:ro
+    command: ["api"]
+    restart: unless-stopped
+
+  # Development service: Interactive shell with Ollama
+  llm-dev:
+    build: .
+    ports:
+      - "8081:8000"    # Different port to avoid conflicts
+      - "11435:11434"  # Different port to avoid conflicts
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_PORT=11434
+      - DEFAULT_MODEL=llama3.2:1b
+    volumes:
+      - /mnt/assets/models/llm:/root/.ollama/models
+      - ./scripts:/app/scripts
+      - ./app:/app/app
+    command: ["shell"]
+    stdin_open: true
+    tty: true
+    profiles: ["dev"]
+
+  # Ollama-only service: Just the LLM backend
+  ollama-only:
+    build: .
+    ports:
+      - "11436:11434"  # Ollama only
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_PORT=11434
+      - DEFAULT_MODEL=llama3.2:1b
+    volumes:
+      - /mnt/assets/models/llm:/root/.ollama/models
+    command: ["ollama-only"]
+    restart: unless-stopped
+    profiles: ["ollama"]

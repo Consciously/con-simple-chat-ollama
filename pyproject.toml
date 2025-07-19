@@ -1,0 +1,29 @@
+[project]
+name = "con_llm_container_base"
+version = "0.1.0"
+description = "Create a clean, reusable LLM container template for local development and lightweight tooling."
+authors = [
+    { name = "Stefan Ihle", email = "stefanihle@gmx.net" }
+]
+requires-python = ">=3.12"
+
+# Core runtime dependencies for a typical lightweight LLM service
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "loguru>=0.7",
+    "ollama>=0.3.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+# Development-time helpers
+dev = [
+    "black>=24.0",
+    "ruff>=0.4",
+    "pytest>=8.0",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
