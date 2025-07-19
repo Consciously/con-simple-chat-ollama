@@ -34,7 +34,7 @@ RUN if [ -s requirements.lock ]; then \
     fi
 
 # Copy application code
-COPY app ./app
+COPY backend ./backend
 COPY scripts ./scripts
 
 # Create directories for Ollama

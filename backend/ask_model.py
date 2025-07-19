@@ -185,7 +185,7 @@ def main(argv: list[str] | None = None) -> None:  # noqa: D401
 
 if __name__ == "__main__":  # pragma: no cover
     # Pass through sys.argv[1:] to keep behaviour consistent when invoked as
-    # `python -m app.ask_model ...` as well as `python app/ask_model.py ...`.
+    # `python -m backend.ask_model ...` as well as `python backend/ask_model.py ...`.
     try:
         main(sys.argv[1:])
     except KeyboardInterrupt:  # graceful exit on Ctrl-C

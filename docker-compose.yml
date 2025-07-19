@@ -12,6 +12,7 @@ services:
     volumes:
       - /mnt/assets/models/llm:/root/.ollama/models
       - ./scripts:/app/scripts:ro
+      - ./backend:/app/backend
     command: ["api"]
     restart: unless-stopped
 
@@ -28,7 +29,7 @@ services:
     volumes:
       - /mnt/assets/models/llm:/root/.ollama/models
       - ./scripts:/app/scripts
-      - ./app:/app/app
+      - ./backend:/app/backend
     command: ["shell"]
     stdin_open: true
     tty: true

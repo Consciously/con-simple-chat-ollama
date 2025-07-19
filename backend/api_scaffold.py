@@ -5,13 +5,15 @@ interface. It's designed to be easily activated when needed without interfering
 with the container's default behavior.
 
 To start the API server:
-    uvicorn api.main:app --host 0.0.0.0 --port 8000
+    uvicorn backend.api_scaffold:app --host 0.0.0.0 --port 8000
 
 The scaffold includes:
 - Single /ask POST endpoint
 - JSON request/response handling
 - Basic error handling
 - Health check endpoint
+
+NOTE: This is a template/scaffold. The main service is in ask_model.py
 """
 
 from fastapi import FastAPI, HTTPException
